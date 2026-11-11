@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Admin Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+        }
+
+        header {
+            background: #1e3a5f;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #00000010;
+        }
+
+        .button {
+            display: inline-block;
+            background: #1e3a5f;
+            color: white;
+            padding: 12px 18px;
+            margin: 8px 5px 0 0;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .button:hover {
+            background: #2d527e;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Online Bookstore</h1>
+    <p>Administrator Dashboard</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Welcome, Admin!</h2>
+        <p>Manage the bookstore inventory from this dashboard.</p>
+        <h3>Total Books: <span th:text="${totalBooks}">0</span></h3>
+    </div>
+
+    <div class="card">
+        <h2>Book Management</h2>
+        <p>View, add, search, edit, and delete books.</p>
+
+        <a class="button" href="/books">View All Books</a>
+        <a class="button" href="/books/new">Add New Book</a>
+    </div>
+
+    <div class="card">
+        <h2>Account</h2>
+        <a class="button" href="/login">Back to Login</a>
+    </div>
+
+</div>
+
+</body>
+</html>
