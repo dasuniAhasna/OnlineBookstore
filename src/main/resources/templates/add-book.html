@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 30px; }
+        .container { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 12px; }
+        h1 { color: #243b64; }
+        label { display: block; margin-top: 15px; }
+        input, select { width: 100%; box-sizing: border-box; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 5px; }
+        button, a { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #3157a4; color: white; border: 0; border-radius: 5px; text-decoration: none; cursor: pointer; }
+        .error { color: #c0392b; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Add a New Book</h1>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form action="/books" method="post">
+        <label>Book ID</label>
+        <input type="number" name="bookId" min="1" required>
+
+        <label>Book Type</label>
+        <select name="type" required>
+            <option value="PRINTED">Printed Book</option>
+            <option value="EBOOK">E-Book</option>
+        </select>
+
+        <label>Title</label>
+        <input type="text" name="title" required maxlength="100">
+
+        <label>Author</label>
+        <input type="text" name="author" required maxlength="100">
+
+        <label>Category</label>
+        <input type="text" name="category" required maxlength="60">
+
+        <label>Price</label>
+        <input type="number" name="price" min="0" step="0.01" required>
+
+        <button type="submit">Save Book</button>
+        <a href="/books">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

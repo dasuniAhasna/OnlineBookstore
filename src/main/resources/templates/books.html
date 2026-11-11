@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 30px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 25px; border-radius: 12px; }
+        h1 { color: #243b64; }
+        a, button { background: #3157a4; color: white; padding: 9px 13px; border: 0; border-radius: 5px; text-decoration: none; cursor: pointer; }
+        input { padding: 9px; border: 1px solid #ccc; border-radius: 5px; margin: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #eaf0fb; }
+        .delete { background: #c0392b; }
+        .actions { display: flex; gap: 8px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Online Bookstore</h1>
+    <p>Book Inventory Management</p>
+
+    <a href="/books/new">+ Add New Book</a>
+
+    <form action="/books" method="get" style="margin-top:20px">
+        <input type="text" name="search" placeholder="Search by title or ID"
+               th:value="${search}">
+        <button type="submit">Search</button>
+        <a href="/books">Show All</a>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Type</th><th>Title</th><th>Author</th>
+            <th>Category</th><th>Price</th><th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.bookId}"></td>
+            <td th:text="${book instanceof T(com.bookstore.model.EBook) ? 'E-Book' : 'Printed Book'}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.category}"></td>
+            <td th:text="${book.price}"></td>
+            <td>
+                <div class="actions">
+                    <a th:href="@{/books/{id}/edit(id=${book.bookId})}">Edit</a>
+                    <form th:action="@{/books/{id}/delete(id=${book.bookId})}" method="post">
+                        <button class="delete" type="submit"
+                                onclick="return confirm('Delete this book?')">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(books)}">
+            <td colspan="7">No books found. Add your first book!</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

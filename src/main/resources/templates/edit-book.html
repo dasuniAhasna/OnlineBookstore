@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 30px; }
+        .container { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 12px; }
+        h1 { color: #243b64; }
+        label { display: block; margin-top: 15px; }
+        input { width: 100%; box-sizing: border-box; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 5px; }
+        button, a { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #3157a4; color: white; border: 0; border-radius: 5px; text-decoration: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Book</h1>
+
+    <form th:action="@{/books/{id}/edit(id=${book.bookId})}" method="post">
+        <label>Book ID</label>
+        <input type="text" th:value="${book.bookId}" readonly>
+
+        <label>Title</label>
+        <input type="text" name="title" th:value="${book.title}" required maxlength="100">
+
+        <label>Author</label>
+        <input type="text" name="author" th:value="${book.author}" required maxlength="100">
+
+        <label>Category</label>
+        <input type="text" name="category" th:value="${book.category}" required maxlength="60">
+
+        <label>Price</label>
+        <input type="number" name="price" th:value="${book.price}" min="0" step="0.01" required>
+
+        <button type="submit">Update Book</button>
+        <a href="/books">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
